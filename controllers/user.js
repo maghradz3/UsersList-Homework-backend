@@ -25,6 +25,7 @@ export const register = async (req, res) => {
       lastName: reqLastName,
       email,
       password: hashedPassword,
+      registrationTime: Date.now(),
     });
     newUser.registrationTime = Date.now();
     const savedUser = await newUser.save();
