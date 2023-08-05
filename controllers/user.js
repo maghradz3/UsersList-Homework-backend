@@ -26,6 +26,7 @@ export const register = async (req, res) => {
       email,
       password: hashedPassword,
     });
+    newUser.registrationTime = Date.now();
     const savedUser = await newUser.save();
     const { _id, firstName, lastName, role } = newUser;
     const { token, refreshToken } = generateToken(
@@ -58,6 +59,8 @@ export const login = async (req, res) => {
     } = existingUser;
     const isPasswordValid = await bcrypt.compare(password, hashedPassword);
     if (isPasswordValid) {
+      existingUser.lastLoginTime = new Date();
+      await existingUser.save();
       const { token, refreshToken } = generateToken(
         { _id, firstName, lastName, role },
         "50m",
