@@ -60,7 +60,7 @@ export const login = async (req, res) => {
     } = existingUser;
     const isPasswordValid = await bcrypt.compare(password, hashedPassword);
     if (isPasswordValid) {
-      existingUser.lastLoginTime = new Date();
+      existingUser.lastLoginTime = Date.now();
       await existingUser.save();
       const { token, refreshToken } = generateToken(
         { _id, firstName, lastName, role },
