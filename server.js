@@ -6,6 +6,7 @@ import cors from "cors";
 
 // routes
 import userRoutes from "./routes/user.js";
+import usersListRoutes from "./routes/usersList.js";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(cors());
 
 // route middlewares
 app.use("/users", userRoutes);
+app.use("/usersList", usersListRoutes);
 
 const PORT = process.env.PORT || 5000;
 
