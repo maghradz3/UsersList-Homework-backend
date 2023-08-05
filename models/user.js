@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
   role: { type: [String], default: ["user"] },
   registrationTime: { type: Date, default: Date.now },
   lastLoginTime: { type: Date },
+  status: { type: [String], default: ["Active"] },
 });
 
 export const User = mongoose.model("User", userSchema);

@@ -29,9 +29,9 @@ export const register = async (req, res) => {
     });
     newUser.registrationTime = Date.now();
     const savedUser = await newUser.save();
-    const { _id, firstName, lastName, role } = newUser;
+    const { _id, firstName, lastName, role, status } = newUser;
     const { token, refreshToken } = generateToken(
-      { _id, firstName, lastName, role },
+      { _id, firstName, lastName, role, status },
       "50m",
       "7d"
     );
