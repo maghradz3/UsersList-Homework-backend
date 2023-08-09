@@ -12,7 +12,7 @@ import { roleMiddleware } from "../middlewares/role.middleware.js";
 const router = express.Router();
 
 router.get("/:id", getUserInfo);
-router.delete("/:id", authMiddleware, roleMiddleware, deleteUser);
+router.delete("/:id", deleteUser);
 
 router.post("/refresh", refreshToken);
 
