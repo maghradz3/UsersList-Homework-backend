@@ -1,6 +1,6 @@
 import { User } from "../models/user.js";
 
-export const getMainProducts = async (req, res) => {
+export const getMainUsers = async (req, res) => {
   const data = req.query;
   console.log(data);
   try {
