@@ -4,11 +4,13 @@ import {
   register,
   getUserInfo,
   refreshToken,
+  deleteUser,
 } from "../controllers/user.js";
 
 const router = express.Router();
 
 router.get("/:id", getUserInfo);
+router.delete("/:id", authMiddleware, roleMiddleware, deleteUser);
 
 router.post("/refresh", refreshToken);
 
