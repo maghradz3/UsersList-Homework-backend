@@ -5,5 +5,5 @@ import { deleteUser } from "../controllers/userList.js";
 const router = express();
 
 router.get("/", getMainUsers);
-router.delete("/:id", deleteUser);
+router.delete("/users/:id", deleteUser);
 export default router;
