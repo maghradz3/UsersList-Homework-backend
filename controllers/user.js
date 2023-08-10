@@ -82,9 +82,9 @@ export const login = async (req, res) => {
 };
 
 export const getUserInfo = async (req, res) => {
-  const { id } = req.params;
+  const { id: _id } = req.params;
   try {
-    const user = await User.findOne({ _id: id });
+    const user = await User.findOne({ _id });
     return res.json({ user, message: "user retrieved successfully" });
   } catch (error) {
     return res.status(404).json({ message: "user not found", user: null });
