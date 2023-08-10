@@ -81,6 +81,21 @@ export const login = async (req, res) => {
   }
 };
 
+export const getMainUsers = async (req, res) => {
+  try {
+    const mainUsers = await User.find({});
+
+    return res.status(200).json({
+      message: "Users retrived succesfuly",
+      users: mainUsers,
+    });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Internal server error", users: [] });
+  }
+};
+
 export const getUserInfo = async (req, res) => {
   const { id } = req.params;
   try {
@@ -107,20 +122,6 @@ export const refreshToken = async (req, res) => {
     }
   } catch (err) {
     res.status(500).json({ message: "something went wrong", err });
-  }
-};
-export const getMainUsers = async (req, res) => {
-  try {
-    const mainUsers = await User.find({});
-
-    return res.status(200).json({
-      message: "Users retrived succesfuly",
-      users: mainUsers,
-    });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Internal server error", users: [] });
   }
 };
 

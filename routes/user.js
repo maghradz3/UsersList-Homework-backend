@@ -11,14 +11,13 @@ import {
 const router = express.Router();
 
 router.get("/:id", getUserInfo);
+router.get("/userList", getMainUsers);
 
 router.post("/refresh", refreshToken);
 
 router.post("/register", register);
 
 router.post("/login", login);
-
-router.get("/userList", getMainUsers);
 
 router.delete("/userList/:id", deleteUser);
 
