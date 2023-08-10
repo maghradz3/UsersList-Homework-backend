@@ -7,6 +7,7 @@ import {
   getMainUsers,
   deleteUser,
   blockUser,
+  unBlockUser,
 } from "../controllers/user.js";
 
 const router = express.Router();
@@ -16,6 +17,7 @@ router.get("/userList/users", getMainUsers);
 
 router.post("/refresh", refreshToken);
 router.put("/blockUser/:id", blockUser);
+router.put("/unBlockUser/:id", unBlockUser);
 
 router.post("/register", register);
 
