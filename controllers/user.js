@@ -54,12 +54,6 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
-  if (blockedUser.status?.includes("Blocked")) {
-    throw new Error(
-      "Login is not allowed for this email as the account status is Blocked"
-    );
-  }
-
   const existingUser = await User.findOne({ email });
   if (existingUser) {
     const {
