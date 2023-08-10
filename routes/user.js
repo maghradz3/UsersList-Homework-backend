@@ -11,7 +11,7 @@ import {
 const router = express.Router();
 
 router.get("/:id", getUserInfo);
-router.get("/userList", getMainUsers);
+router.get("/userList/users", getMainUsers);
 
 router.post("/refresh", refreshToken);
 
