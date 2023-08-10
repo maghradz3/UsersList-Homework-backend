@@ -168,7 +168,7 @@ export const unBlockUser = async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-    user.status = user.status[0] === "Blocked" ? ["Active"] : ["ACtive"];
+    user.status = user.status[0] === "Blocked" ? ["Active"] : ["Active"];
     await user.save();
     return res.json({ message: "Status updated successfully", user });
   } catch (error) {
