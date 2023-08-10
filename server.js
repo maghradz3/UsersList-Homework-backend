@@ -16,7 +16,7 @@ const app = express();
 // general middlewares
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
+// app.use(cors());
 
 // WHY ARE SAME TOKENS GENERATED
 
