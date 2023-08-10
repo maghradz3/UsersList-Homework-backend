@@ -16,15 +16,13 @@ export const register = async (req, res) => {
       email,
     });
     if (emailExists.length) {
-      throw new Error("email already exists");
-    }
-    const existingUser = await User.findOne({
-      email,
-    });
-    if (existingUser.status?.includes("Blocked")) {
-      throw new Error(
-        "Registration is not allowed for this email as the account status is Blocked"
-      );
+      if (emailExists.status?.includes("Blocked")) {
+        throw new Error(
+          "Registration is not allowed for this email as the account status is Blocked"
+        );
+      } else {
+        throw new Error("email already exists");
+      }
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -55,9 +53,7 @@ export const register = async (req, res) => {
 };
 export const login = async (req, res) => {
   const { email, password } = req.body;
-  const blockedUser = await User.findOne({
-    email,
-  });
+
   if (blockedUser.status?.includes("Blocked")) {
     throw new Error(
       "Login is not allowed for this email as the account status is Blocked"
@@ -74,6 +70,11 @@ export const login = async (req, res) => {
       password: hashedPassword,
       role,
     } = existingUser;
+    if (existingUser.status?.includes("Blocked")) {
+      throw new Error(
+        "Login is not allowed for this email as the account status is Blocked"
+      );
+    }
     const isPasswordValid = await bcrypt.compare(password, hashedPassword);
     if (isPasswordValid) {
       existingUser.lastLoginTime = Date.now();
