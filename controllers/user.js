@@ -26,6 +26,7 @@ export const register = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+
     const newUser = new User({
       firstName: reqFirstName,
       lastName: reqLastName,
@@ -33,7 +34,15 @@ export const register = async (req, res) => {
       password: hashedPassword,
       registrationTime: new Date(),
     });
-    newUser.registrationTime = Date.now();
+
+    newUser.registrationTime = Date.now().toLocaleString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
     const savedUser = await newUser.save();
     const { _id, firstName, lastName, role, status } = newUser;
     const { token, refreshToken } = generateToken(
