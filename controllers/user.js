@@ -18,6 +18,14 @@ export const register = async (req, res) => {
     if (emailExists.length) {
       throw new Error("email already exists");
     }
+    const existingUser = await User.findOne({
+      email,
+    });
+    if (existingUser && existingUser.status.includes("Blocked")) {
+      throw new Error(
+        "Registration is not allowed for this email as the account status is Blocked"
+      );
+    }
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
