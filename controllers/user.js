@@ -110,8 +110,6 @@ export const refreshToken = async (req, res) => {
   }
 };
 export const getMainUsers = async (req, res) => {
-  const data = req.query;
-  console.log(data);
   try {
     const mainUsers = await User.find({});
 
