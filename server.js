@@ -4,22 +4,17 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
 
-// routes
 import userRoutes from "./routes/user.js";
 
 dotenv.config();
 
 const app = express();
 
-// middlewares
 // general middlewares
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-// WHY ARE SAME TOKENS GENERATED
-
-// route middlewares
 app.use("/users", userRoutes);
 
 const PORT = process.env.PORT || 5000;
