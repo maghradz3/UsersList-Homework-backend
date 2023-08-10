@@ -6,7 +6,7 @@ import cors from "cors";
 
 // routes
 import userRoutes from "./routes/user.js";
-import usersList from "./routes/usersList.js";
+import userList from "./routes/userList.js";
 
 dotenv.config();
 
@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // route middlewares
 app.use("/users", userRoutes);
-app.use("/usersList", usersList);
+app.use("/userList", userList);
 
 const PORT = process.env.PORT || 5000;
 
