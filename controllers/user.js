@@ -18,7 +18,7 @@ export const register = async (req, res) => {
     if (emailExists.length) {
       throw new Error("email already exists");
     }
-    const existingUser = await User.find({
+    const existingUser = await User.findOne({
       email,
     });
     if (existingUser.status?.includes("Blocked")) {
@@ -55,7 +55,7 @@ export const register = async (req, res) => {
 };
 export const login = async (req, res) => {
   const { email, password } = req.body;
-  const blockedUser = await User.find({
+  const blockedUser = await User.findOne({
     email,
   });
   if (blockedUser.status?.includes("Blocked")) {
