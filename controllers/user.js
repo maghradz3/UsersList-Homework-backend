@@ -12,16 +12,16 @@ export const register = async (req, res) => {
   } = req.body;
 
   try {
-    const emailExists = await User.find({
-      email,
-    });
-    if (emailExists.length) {
-      if (emailExists.status?.includes("Blocked")) {
-        throw new Error(
-          "Registration is not allowed for this email as the account status is Blocked"
-        );
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      if (existingUser.status.includes("Blocked")) {
+        return res.status(403).json({
+          message:
+            "Registration is not allowed for this email as the account status is Blocked",
+        });
       } else {
-        throw new Error("email already exists");
+        throw new Error("Email already exists");
       }
     }
 
