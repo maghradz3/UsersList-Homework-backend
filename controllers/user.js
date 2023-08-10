@@ -56,6 +56,11 @@ export const login = async (req, res) => {
 
   const existingUser = await User.findOne({ email });
   if (existingUser) {
+    if (existingUser.status.includes("Blocked")) {
+      return res
+        .status(403)
+        .json({ message: "User is blocked and cannot log in." });
+    }
     const {
       _id,
       firstName,
@@ -64,11 +69,6 @@ export const login = async (req, res) => {
       password: hashedPassword,
       role,
     } = existingUser;
-    if (existingUser.status?.includes("Blocked")) {
-      throw new Error(
-        "Login is not allowed for this email as the account status is Blocked"
-      );
-    }
     const isPasswordValid = await bcrypt.compare(password, hashedPassword);
     if (isPasswordValid) {
       existingUser.lastLoginTime = Date.now();
