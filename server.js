@@ -11,12 +11,12 @@ import usersListRoute from "./routes/usersList.js";
 dotenv.config();
 
 const app = express();
+app.use(cors());
 
 // middlewares
 // general middlewares
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(cors());
 
 // WHY ARE SAME TOKENS GENERATED
 
