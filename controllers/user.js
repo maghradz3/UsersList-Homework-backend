@@ -26,15 +26,6 @@ export const register = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const dateObject = new Date();
-    const date = ("0" + dateObject.getDate()).slice(-2);
-    const month = ("0" + (dateObject.getMonth() + 1)).slice(-2);
-    const year = dateObject.getFullYear();
-    const hours = ("0" + dateObject.getHours()).slice(-2);
-    const minutes = ("0" + dateObject.getMinutes()).slice(-2);
-    const seconds = ("0" + dateObject.getSeconds()).slice(-2);
-
-    const formattedDate = `${date}/${month}/${year} ${hours}:${minutes}:${seconds}`;
     const newUser = new User({
       firstName: reqFirstName,
       lastName: reqLastName,
@@ -42,7 +33,7 @@ export const register = async (req, res) => {
       password: hashedPassword,
       registrationTime: new Date(),
     });
-    newUser.registrationTime = formattedDate;
+    newUser.registrationTime = Date.now();
     const savedUser = await newUser.save();
     const { _id, firstName, lastName, role, status } = newUser;
     const { token, refreshToken } = generateToken(
