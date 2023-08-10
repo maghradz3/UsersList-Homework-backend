@@ -110,7 +110,7 @@ export const refreshToken = async (req, res) => {
   }
 };
 
-export const deleteProduct = async (req, res) => {
+export const deleteUser = async (req, res) => {
   const { id: _id } = req.params;
   try {
     const UserExists = await User.exists({ _id });
