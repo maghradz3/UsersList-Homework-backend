@@ -35,15 +35,14 @@ export const register = async (req, res) => {
     const seconds = ("0" + dateObject.getSeconds()).slice(-2);
 
     const formattedDate = `${date}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-
     const newUser = new User({
       firstName: reqFirstName,
       lastName: reqLastName,
       email,
       password: hashedPassword,
-      registrationTime: formattedDate,
+      registrationTime: new Date(),
     });
-
+    newUser.registrationTime = formattedDate;
     const savedUser = await newUser.save();
     const { _id, firstName, lastName, role, status } = newUser;
     const { token, refreshToken } = generateToken(
