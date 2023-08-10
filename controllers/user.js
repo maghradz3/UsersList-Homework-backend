@@ -1,5 +1,5 @@
 import { User } from "../models/user.js";
-import { generateToken } from "../utils/generateTOken.js";
+import { generateToken } from "../utils/generateToken.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
