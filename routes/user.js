@@ -8,6 +8,7 @@ import {
   deleteUser,
   blockUser,
   unBlockUser,
+  makeAdmin,
 } from "../controllers/user.js";
 
 const router = express.Router();
@@ -24,5 +25,6 @@ router.post("/register", register);
 router.post("/login", login);
 
 router.delete("/userList/:id", deleteUser);
+router.put("/makeAdmin/:id", makeAdmin);
 
 export default router;

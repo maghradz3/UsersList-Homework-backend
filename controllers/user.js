@@ -188,3 +188,20 @@ export const unBlockUser = async (req, res) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const makeAdmin = async (req, res) => {
+  const { id: _id } = req.params;
+
+  try {
+    const user = await User.findById(_id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    user.role = user.role === "user" ? "admin" : "role";
+    await user.save();
+    return res.json({ message: "Status updated successfully", user });
+  } catch (error) {
+    console.error("Error updating status:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
