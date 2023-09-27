@@ -197,7 +197,7 @@ export const makeAdmin = async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-    user.role = user.role === "user" ? "admin" : "role";
+    user.role = user.role === "user" ? "admin" : "user";
     await user.save();
     return res.json({ message: "Status updated successfully", user });
   } catch (error) {
